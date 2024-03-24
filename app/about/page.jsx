@@ -50,8 +50,8 @@ export default function About() {
               satisfaction above all else.
               <br />
               What started as a small-scale endeavor quickly gained momentum as
-              word spread about SAQ&CO's unique approach to ecommerce. Customers
-              were drawn to the platform's curated selection of premium goods,
+              word spread about SAQ&COs unique approach to ecommerce. Customers
+              were drawn to the platforms curated selection of premium goods,
               personalized service, and dedication to ethical business
               practices.
             </StoryDescription>
