@@ -41,14 +41,19 @@ export default function About() {
           <StoryText>
             <StoryTitle>How It Started</StoryTitle>
             <StoryDescription>
-              Saq&CO was founded in Accra in 2024, with a mission to create an
-              apparel brand that would speak to a new generation of creatives
-              and entrepreneurs. What once started as a favourite in Montreal’s
-              Mile End quickly blossomed into one of Canada’s leading lifestyle
-              brands and digital retailers. A certified B Corp, HM&CO is now a
-              leader in sustainable fashion and using innovative fabrics from
-              nature to make products that are thoughtfully designed to help you
-              live better, enjoy more, and feel good in everything you wear.
+              SAQ&CO began in Accra as a passion project among a group of
+              friends who shared a common frustration with the lack of options
+              for quality products in the online shopping landscape.
+              Dissatisfied with the overwhelming array of mediocre offerings and
+              impersonal shopping experiences, they envisioned creating a
+              platform that would prioritize quality, authenticity, and customer
+              satisfaction above all else.
+              <br />
+              What started as a small-scale endeavor quickly gained momentum as
+              word spread about SAQ&CO's unique approach to ecommerce. Customers
+              were drawn to the platform's curated selection of premium goods,
+              personalized service, and dedication to ethical business
+              practices.
             </StoryDescription>
           </StoryText>
         </StoryWrapper>
@@ -84,7 +89,7 @@ export default function About() {
               <h2 className="title">Inspire innovations</h2>
               <p className="description">
                 We are a forward-thinking brand that delivers cutting-edge
-                products to fit our customers' modern and evolving lifestyles.
+                products to fit our customers modern and evolving lifestyles.
               </p>
             </ValueCard>
             {/* 4 */}
