@@ -1,6 +1,5 @@
 import { MAIN } from "../_ui/uiContainers";
 import { client } from "../_lib/sanity";
-import Link from "next/link";
 import AddToCart from "../components/AddToCart";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
@@ -10,7 +9,15 @@ import {
   CategoryCard,
   CategoryName,
   CategoryTitleAndArrows,
+  ProductsContainer,
 } from "./ProductsPageStyles";
+import {
+  ProductCard,
+  ProductImage,
+  ProductsCardsContainer,
+} from "./[category]/CategoryStyles";
+import Image from "next/image";
+
 /*
 /products
 
@@ -22,20 +29,20 @@ const getAllProducts = async () => {
   const queryProducts = `
   *[_type == "product"] {
     name,
+    price,
     category->{name},
     description,
-    images,
+    "slug": slug.current,
+    "imageUrl": images[0].asset->url,
   } | order(publishedAt desc)  
   `;
 
   const res = await client.fetch(queryProducts, {
     // revalidate the query after every hour
-    next: { revalidate: 10 },
+    next: { revalidate: 360 },
   });
   return res;
 };
-
-// "imageUrl": images[0].asset->url,
 
 // function to list all categories and display them
 export const getAllCategories = async () => {
@@ -47,7 +54,7 @@ export const getAllCategories = async () => {
   `;
   const res = await client.fetch(queryCategories, {
     // revalidate the query after every hour
-    next: { revalidate: 10 },
+    next: { revalidate: 360 },
   });
   return res;
 };
@@ -77,16 +84,32 @@ export default async function Products() {
             </CategoryCard>
           ))}
         </CategoriesCardsContainer>
+
         {/* all products */}
-        <div>
+        <ProductsContainer>
           {products.map((product, i) => (
-            <div key={i}>
+            <ProductCard
+              key={i}
+              href={`/products/${product.category.name}/${product.slug}`}
+            >
+              <ProductImage>
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name}
+                  priority
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </ProductImage>
               <h2>{product.name}</h2>
-              <h2>{product.category.name}</h2>
-              <AddToCart product={product} />
-            </div>
+              <h2>${product.price}</h2>
+              <h2 style={{ fontWeight: "600", fontSize: "1.2rem" }}>
+                {product.category.name}
+              </h2>
+              {/* <AddToCart product={product} /> */}
+            </ProductCard>
           ))}
-        </div>
+        </ProductsContainer>
       </CategoriesContainer>
     </MAIN>
   );

@@ -1,16 +1,20 @@
 "use client";
 import Link from "next/link";
 import { styled } from "styled-components";
+import { ProductsCardsContainer } from "./[category]/CategoryStyles";
 
 // styling for all products' page
 
 export const CategoriesContainer = styled.div`
-  border: 1px solid black;
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 2rem 0;
+  width: 90%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const CategoryTitleAndArrows = styled.div`
@@ -26,7 +30,6 @@ export const CategoryTitleAndArrows = styled.div`
 `;
 
 export const CategoriesCardsContainer = styled.div`
-  padding: 0px 1rem;
   display: flex;
   width: 100%;
   overflow-x: scroll;
@@ -38,6 +41,10 @@ export const CategoriesCardsContainer = styled.div`
   }
 
   scrollbar-width: none;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 export const CategoryCard = styled(Link)`
@@ -47,15 +54,14 @@ export const CategoryCard = styled(Link)`
   text-decoration: none;
   font-family: inherit;
   color: inherit;
-
-  &:hover button {
-    text-decoration: underline;
-  }
-
   background-image: ${({ bgimage }) => `url(${bgimage})`};
   background-position: center;
   background-size: cover;
   overflow: hidden;
+
+  &:hover button {
+    text-decoration: underline;
+  }
 
   &:before {
     content: "";
@@ -85,4 +91,8 @@ export const CategoryName = styled.button`
   outline: none;
   cursor: pointer;
   font-size: 1.4rem;
+`;
+
+export const ProductsContainer = styled(ProductsCardsContainer)`
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
 `;

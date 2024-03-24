@@ -12,6 +12,7 @@ export const CategoryContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
   border: 1px solid green;
 `;
@@ -20,6 +21,7 @@ export const CategoryHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 90%;
 `;
 
 export const CategoryTitle = styled.div`
@@ -30,8 +32,14 @@ export const CategoryTitle = styled.div`
 export const ProductsCardsContainer = styled.div`
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(4, 1fr);
-  border: 2px solid red;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* border: 2px solid red; */
+  background: pink;
+  width: 90%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const ProductCard = styled(Link)`
@@ -39,7 +47,8 @@ export const ProductCard = styled(Link)`
   font-family: inherit;
   color: inherit;
   border: 2px solid #cbcbcb;
-  padding: 1rem;
+  /* padding: 1rem; */
+  width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -49,6 +58,11 @@ export const ProductCard = styled(Link)`
 
   &:hover {
     border: 2px solid #141415;
+  }
+
+  @media (max-width: 768px) {
+    align-items: center;
+    text-align: center;
   }
 `;
 

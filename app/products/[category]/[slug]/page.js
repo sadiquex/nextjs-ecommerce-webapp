@@ -19,6 +19,7 @@ export const getProductDetails = async (product) => {
     "imageUrl": images[0].asset->url,
       price,
       name,
+      price_id,
       description,
       "slug": slug.current,
       "categoryName": category->name,

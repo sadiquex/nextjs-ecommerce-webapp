@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { styled } from "styled-components";
 
+import { FaTimes } from "react-icons/fa";
+
 export default function CartDrawer() {
   const { quantity } = useSelector((state) => state.cart);
 
@@ -29,15 +31,23 @@ export default function CartDrawer() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 450 }}
+      // sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 450 }}
+      sx={{
+        // 450px on larger screens, auto on smaller screens
+        width: ["auto", "450px"],
+      }}
       role="presentation"
       onClick={(event) => {
-        event.stopPropagation(); // Prevent event from bubbling up
+        event.stopPropagation(); // prevent event from bubbling up - do not close then inside elements are clicked
       }}
       onKeyDown={(event) => {
-        event.stopPropagation(); // Prevent event from bubbling up
+        event.stopPropagation(); // prevent event from bubbling up
       }}
     >
+      <Heading>
+        <h2>Your shopping cart</h2>
+        <FaTimes onClick={toggleDrawer(anchor, false)} size={24} />
+      </Heading>
       {/* cart */}
       <Cart />
     </Box>
@@ -75,4 +85,16 @@ const Qty = styled.span`
   top: -1rem;
   font-size: 1.2rem;
   font-weight: 600;
+`;
+
+const Heading = styled.div`
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
 `;

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function ProductImages({ product }) {
-  const [selectedImage, setSelectedImage] = useState(product.images[0]);
+  const [selectedImage, setSelectedImage] = useState(product?.images[0]);
 
   //   function to switch active image
   const handleImageClick = (image) => {
@@ -17,7 +17,7 @@ export default function ProductImages({ product }) {
     <ImageDisplayWrapper>
       <BigImage>
         <Image
-          src={urlFor(selectedImage.asset?._ref).url()}
+          src={urlFor(selectedImage?.asset?._ref).url()}
           alt={product.name}
           priority
           fill
@@ -52,8 +52,8 @@ const ImageDisplayWrapper = styled.div`
 
 const BigImage = styled.div`
   position: relative;
-  width: 300px;
   height: 300px;
+  width: 100%;
 
   img {
     object-fit: cover;

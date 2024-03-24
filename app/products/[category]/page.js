@@ -42,42 +42,40 @@ export default async function ProductsByCategory({ params }) {
   const allCategories = await getAllCategories();
 
   return (
-    <MAIN>
-      <CategoryContainer>
-        <CategoryHeader>
-          <p>By Category</p>
-          <CategoryTitle>{params.category}</CategoryTitle>
-          <select>
-            {allCategories?.map((category, i) => (
-              <option key={i}>{category.name}</option>
-            ))}
-          </select>
-        </CategoryHeader>
-        <ProductsCardsContainer>
-          {productsByCategory.map((product, i) => (
-            // each product's card
-            <ProductCard
-              key={i}
-              href={`/products/${params.category}/${product.slug}`}
-            >
-              <ProductImage>
-                <Image
-                  src={product.imageUrl}
-                  alt={product.name}
-                  priority
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </ProductImage>
-              <ProductName>{product.name}</ProductName>
-              <ProductPrice>${product.price}</ProductPrice>
-              {/* pass the product as a prop to the cart */}
-              {/* <AddToCart product={product} /> */}
-              <button>View Item</button>
-            </ProductCard>
+    <CategoryContainer>
+      <CategoryHeader>
+        <p>By Category</p>
+        <CategoryTitle>{params.category}</CategoryTitle>
+        <select>
+          {allCategories?.map((category, i) => (
+            <option key={i}>{category.name}</option>
           ))}
-        </ProductsCardsContainer>
-      </CategoryContainer>
-    </MAIN>
+        </select>
+      </CategoryHeader>
+      <ProductsCardsContainer>
+        {productsByCategory.map((product, i) => (
+          // each product's card
+          <ProductCard
+            key={i}
+            href={`/products/${params.category}/${product.slug}`}
+          >
+            <ProductImage>
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                priority
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </ProductImage>
+            <ProductName>{product.name}</ProductName>
+            <ProductPrice>${product.price}</ProductPrice>
+            {/* pass the product as a prop to the cart */}
+            {/* <AddToCart product={product} /> */}
+            {/* <button>View Item</button> */}
+          </ProductCard>
+        ))}
+      </ProductsCardsContainer>
+    </CategoryContainer>
   );
 }

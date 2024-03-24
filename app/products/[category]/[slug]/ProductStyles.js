@@ -22,4 +22,8 @@ export const ProductName = styled.h2`
   padding-top: 1rem;
   font-weight: 600;
   font-size: 2rem;
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;

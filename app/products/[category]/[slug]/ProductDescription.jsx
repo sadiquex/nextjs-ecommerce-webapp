@@ -1,15 +1,17 @@
 "use client";
 import { BTN } from "@/app/_ui/uiContainers";
-import AddToCart from "@/app/components/AddToCart";
 import { addProduct } from "@/app/redux/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
+import { useShoppingCart } from "use-shopping-cart";
 
 export default function ProductDescription({ product }) {
   const dispatch = useDispatch();
+  const { checkoutSingleItem } = useShoppingCart();
 
-  console.log(product);
-  console.log("ada");
+  const buyNow = (productPrice) => {
+    checkoutSingleItem(productPrice);
+  };
 
   //   dispatch a function to add received prop(product) to the cart
   const handleAddToCart = () => {
@@ -32,7 +34,7 @@ export default function ProductDescription({ product }) {
       <Buttons>
         <AddToCartBtn onClick={handleAddToCart}>Add to cart</AddToCartBtn>
         {/* go straight to stripe page */}
-        <BuyNowBtn>Buy Now</BuyNowBtn>
+        <BuyNowBtn onClick={() => buyNow(product.price_id)}>Buy Now</BuyNowBtn>
       </Buttons>
     </DescriptionWrapper>
   );
@@ -46,7 +48,7 @@ const DescriptionWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  @media (max-width: 960px) {
+  @media (max-width: 768px) {
     padding: 1rem;
   }
 `;
@@ -57,7 +59,6 @@ const Description = styled.p`
 `;
 
 const QtyAndPrice = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -66,11 +67,17 @@ const QtyAndPrice = styled.div`
   h3 {
     font-weight: 600;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
 
 const Quantity = styled.div`
+  display: flex;
+  gap: 4px;
   button {
-    /* border: 2px solid #000; */
   }
 `;
 

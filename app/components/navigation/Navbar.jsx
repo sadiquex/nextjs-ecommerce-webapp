@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import Box from "@mui/material/Box";
@@ -28,6 +28,26 @@ export const navItems = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+
+  // handle stickiness of navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      // set the navbar to be sticky the moment we scroll down
+      const offset = window.scrollY;
+      if (offset > 0) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -35,27 +55,21 @@ export default function Navbar() {
 
   return (
     <MAIN>
-      <Box>
+      <Box sx={{ width: "100%" }}>
         {/* navbar */}
         <div
           style={{
+            position: isSticky ? "fixed" : "static",
             top: 0,
             left: 0,
             right: 0,
             zIndex: 999,
             backgroundColor: "#fff",
+            boxShadow: isSticky ? "0px 2px 4px rgba(0, 0, 0, 0.1)" : "none",
           }}
         >
           {/* navbar */}
-          <Toolbar
-            sx={{
-              paddingLeft: 0,
-              paddingRight: 0,
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
+          <Toolbar>
             {/* logo */}
             <Box
               component="div"
@@ -75,7 +89,11 @@ export default function Navbar() {
                 SADIQUE STORE
               </Link>
             </Box>
-            <Box sx={{ display: { xs: "none", sm: "flex" }, gap: "6rem" }}>
+            <Box
+              sx={{
+                display: { xs: "none", sm: "flex" },
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -84,18 +102,7 @@ export default function Navbar() {
               >
                 {navItems.map((item) => (
                   <Link href={`${item.link}`} key={item.name}>
-                    <Button
-                      sx={{
-                        color: item.textColor,
-                        backgroundColor: item.backgroundColor,
-
-                        "&:hover": {
-                          backgroundColor: item.backgroundColor,
-                        },
-                      }}
-                    >
-                      {item.name}
-                    </Button>
+                    <Button sx={{ color: "#000" }}>{item.name}</Button>
                   </Link>
                 ))}
               </Box>

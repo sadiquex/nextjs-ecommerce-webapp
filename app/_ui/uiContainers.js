@@ -8,7 +8,7 @@ export const MAIN = styled.main`
   align-items: center;
   flex-direction: column;
   gap: 1rem;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
 `;
 
 // Sections UI

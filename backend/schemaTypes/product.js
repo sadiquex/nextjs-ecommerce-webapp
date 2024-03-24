@@ -34,6 +34,11 @@ export default {
       title: 'Price ',
     },
     {
+      name: 'price_id',
+      title: 'Sanity Price ID',
+      type: 'string',
+    },
+    {
       // want to reference our category for the products
       name: 'category',
       title: 'Product Category',

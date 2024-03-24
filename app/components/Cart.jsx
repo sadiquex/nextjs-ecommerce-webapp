@@ -9,10 +9,21 @@ import { styled } from "styled-components";
 import Image from "next/image";
 import { FaTrashCan } from "react-icons/fa6";
 import { BTN } from "../_ui/uiContainers";
+import { useShoppingCart } from "use-shopping-cart";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const { itemsInCart, total } = useSelector((state) => state.cart);
+  // const { redirectToCheckout } = useShoppingCart();
+
+  // const handleCheckout = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const result = await redirectToCheckout(itemsInCart);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <ItemsWrapper>
@@ -34,7 +45,10 @@ export default function Cart() {
 
               <ItemText>
                 <NameAndAmount>
-                  <ItemName>{item.name}</ItemName>
+                  <ItemName>
+                    {/* trim to show only 5 words */}
+                    {item.name.split(" ").slice(0, 5).join(" ")}...
+                  </ItemName>
                   <Amount>${item.price * item.quantity}</Amount>
                 </NameAndAmount>
 
@@ -60,6 +74,7 @@ export default function Cart() {
         <hr />
         <TotalAndCheckout>
           <Total>${total}</Total>
+          {/* <CheckoutBtn onClick={handleCheckout}>CHECKOUT</CheckoutBtn> */}
           <CheckoutBtn>CHECKOUT</CheckoutBtn>
         </TotalAndCheckout>
       </TotalWrapper>
@@ -71,7 +86,7 @@ const ItemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  min-height: 90vh;
   gap: 0.5em;
   padding: 1.4rem;
 `;
@@ -108,6 +123,7 @@ const ItemText = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   height: 100%;
+  gap: 1rem;
 `;
 
 const NameAndAmount = styled.div`
@@ -116,12 +132,13 @@ const NameAndAmount = styled.div`
 `;
 
 const ItemName = styled.h3`
-  font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
 `;
 
 const Amount = styled(ItemName)`
   display: inline;
+  font-size: 1.2rem;
+  font-weight: 600;
 `;
 
 const Buttons = styled.div`
