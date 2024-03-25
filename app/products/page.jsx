@@ -34,7 +34,8 @@ const getAllProducts = async () => {
     description,
     "slug": slug.current,
     "imageUrl": images[0].asset->url,
-  } | order(publishedAt desc)  
+    price_id
+  }
   `;
 
   const res = await client.fetch(queryProducts, {

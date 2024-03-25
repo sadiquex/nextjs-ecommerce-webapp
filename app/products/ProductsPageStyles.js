@@ -94,5 +94,5 @@ export const CategoryName = styled.button`
 `;
 
 export const ProductsContainer = styled(ProductsCardsContainer)`
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 `;

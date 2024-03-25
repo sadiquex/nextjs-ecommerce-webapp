@@ -61,8 +61,6 @@ const cartSlice = createSlice({
 
     // increase item quantity in cart
     increaseQuantity: (state, action) => {
-      console.log(action.payload.quantity);
-
       // find the item with the same index as the id of the payload
       const item = state.itemsInCart.findIndex(
         (product) => product._id === action.payload._id

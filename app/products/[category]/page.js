@@ -25,7 +25,8 @@ export const getProductsByCategory = async (category) => {
       price,
       name,
       "slug": slug.current,
-      "categoryName": category->name
+      "categoryName": category->name,
+      price_id
   }`;
 
   const res = await client.fetch(productsByCategory, {

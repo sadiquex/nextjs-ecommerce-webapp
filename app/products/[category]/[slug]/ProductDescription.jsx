@@ -1,6 +1,10 @@
 "use client";
 import { BTN } from "@/app/_ui/uiContainers";
-import { addProduct } from "@/app/redux/cart/cartSlice";
+import {
+  addProduct,
+  decreaseQuantity,
+  increaseQuantity,
+} from "@/app/redux/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import { useShoppingCart } from "use-shopping-cart";
@@ -9,6 +13,7 @@ export default function ProductDescription({ product }) {
   const dispatch = useDispatch();
   const { checkoutSingleItem } = useShoppingCart();
 
+  // buy a single item
   const buyNow = (productPrice) => {
     checkoutSingleItem(productPrice);
   };
@@ -20,7 +25,7 @@ export default function ProductDescription({ product }) {
 
   return (
     <DescriptionWrapper>
-      <Description>{product.description}</Description>
+      <Description>{product?.description}</Description>
       <QtyAndPrice>
         <h3>Quantity:</h3>
         <Quantity>
@@ -28,13 +33,13 @@ export default function ProductDescription({ product }) {
           <BTN>1</BTN>
           <BTN>+</BTN>
         </Quantity>
-        <Price>${product.price}</Price>
+        <Price>${product?.price}</Price>
       </QtyAndPrice>
 
       <Buttons>
         <AddToCartBtn onClick={handleAddToCart}>Add to cart</AddToCartBtn>
         {/* go straight to stripe page */}
-        <BuyNowBtn onClick={() => buyNow(product.price_id)}>Buy Now</BuyNowBtn>
+        <BuyNowBtn onClick={() => buyNow(product?.price_id)}>Buy Now</BuyNowBtn>
       </Buttons>
     </DescriptionWrapper>
   );

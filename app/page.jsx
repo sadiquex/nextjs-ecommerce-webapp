@@ -12,14 +12,14 @@ import {
   StoryWrapper,
   ValueCard,
   ValuesContainer,
-} from "./AboutStyles";
-import { MAIN } from "../_ui/uiContainers";
+} from "./HomeStyles";
+import { MAIN } from "./_ui/uiContainers";
 import { FaHandshake } from "react-icons/fa";
 import { PiUniteSquareFill } from "react-icons/pi";
 import { BsLightningCharge } from "react-icons/bs";
 import { GrGrow } from "react-icons/gr";
 
-export default function About() {
+export default function Home() {
   return (
     <div>
       <PageHeader>

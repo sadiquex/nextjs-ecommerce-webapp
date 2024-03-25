@@ -17,8 +17,8 @@ export default function ProductImages({ product }) {
     <ImageDisplayWrapper>
       <BigImage>
         <Image
-          src={urlFor(selectedImage?.asset?._ref).url()}
-          alt={product.name}
+          src={selectedImage && urlFor(selectedImage.asset?._ref)?.url()}
+          alt={product?.name}
           priority
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -29,7 +29,7 @@ export default function ProductImages({ product }) {
           <SmallImage key={i} onClick={() => handleImageClick(image)}>
             <Image
               src={image && urlFor(image.asset?._ref)?.url()}
-              alt={product.name}
+              alt={product?.name}
               priority
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -56,7 +56,7 @@ const BigImage = styled.div`
   width: 100%;
 
   img {
-    object-fit: cover;
+    object-fit: contain;
     transition: all 0.3s ease-in-out;
   }
 `;

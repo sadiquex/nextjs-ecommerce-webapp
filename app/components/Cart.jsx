@@ -4,26 +4,37 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import { increaseQuantity, removeProduct } from "../redux/cart/cartSlice";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeProduct,
+} from "../redux/cart/cartSlice";
 import { styled } from "styled-components";
 import Image from "next/image";
 import { FaTrashCan } from "react-icons/fa6";
 import { BTN } from "../_ui/uiContainers";
 import { useShoppingCart } from "use-shopping-cart";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const { itemsInCart, total } = useSelector((state) => state.cart);
-  // const { redirectToCheckout } = useShoppingCart();
+  // const { totalPrice, redirectToCheckout, cartCount } = useShoppingCart();
 
-  // const handleCheckout = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const result = await redirectToCheckout(itemsInCart);
-  //   } catch (error) {
-  //     console.log(error);
+  // const handleCheckout = async () => {
+  //   const stripe = await loadStripe();
+  //   const response = await fetch('/api/stripe', {
+  //   method: 'POST',
+  //   headers: {
+  //   'Content-Type': 'application/json',
+  //   'Accept': 'application/json'
+  //   },
+  //   body: JSON.stringify(itemsInCart),
+  //   });
+  //   if (response.statusCode === 500) return;
+  //   const data = await response.json();
+  //   const result = await stripe.redirectToCheckout({ sessionId: data.id, });
   //   }
-  // };
 
   return (
     <ItemsWrapper>
@@ -55,9 +66,13 @@ export default function Cart() {
                 {/* down */}
                 <Buttons>
                   <div>
-                    <BTN>-</BTN>
+                    <BTN onClick={() => dispatch(decreaseQuantity(item))}>
+                      -
+                    </BTN>
                     <BTN>{item.quantity}</BTN>
-                    <BTN>+</BTN>
+                    <BTN onClick={() => dispatch(increaseQuantity(item))}>
+                      +
+                    </BTN>
                   </div>
 
                   <FaTrashCan
@@ -154,7 +169,6 @@ const Buttons = styled.div`
 `;
 
 const TotalWrapper = styled.div`
-  border: 2px solid red;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;

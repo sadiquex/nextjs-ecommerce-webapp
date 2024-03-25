@@ -35,7 +35,7 @@ export default {
     },
     {
       name: 'price_id',
-      title: 'Sanity Price ID',
+      title: 'Stripe Price ID',
       type: 'string',
     },
     {
