@@ -4,6 +4,7 @@
 
 - Nextjs 14 - for dev
 - Styled components + MUI - for styling
+- Sanity - for content management
 - Redux Toolkit - for state management
 - Stripe - for payment gateway
 
